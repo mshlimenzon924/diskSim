@@ -1,0 +1,9 @@
+Name: Mira Shlimenzon
+Functionality: My program is fully functional. C-LOOK and C-SCAN are both running on the assumption that the disk can only be scanned from low to high addresses. 
+
+
+To make diskSim.py executable 
+1. rm diskSim
+2. ln -s diskSim.py diskSim
+3. chmod +x diskSim
+You should now be able to run the executable without the .py extension

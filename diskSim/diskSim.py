@@ -6,17 +6,22 @@ MAX = 4999  # max cylinder number
 
 def c_look(initial, sequence):
     total_distance = 0
-    initial = abs(initial)
 
     copy_sequence = sequence.copy()
-    copy_sequence.append(initial)
+    copy_sequence.append(abs(initial))
     copy_sequence.sort()
-    index_initial = copy_sequence.index(initial)
+    index_initial = copy_sequence.index(abs(initial))
 
-    total_distance += abs(copy_sequence[len(copy_sequence)-1] - initial) 
-    if copy_sequence[0] < initial:
-        total_distance += abs(copy_sequence[len(copy_sequence)-1] - copy_sequence[0])
-        total_distance += abs(copy_sequence[index_initial - 1] - copy_sequence[0])
+    if initial < 0:     # moving left
+        initial = abs(initial)
+        total_distance += abs(initial - copy_sequence[0])
+        if copy_sequence[len(copy_sequence)-1] > initial: 
+            total_distance += abs(copy_sequence[len(copy_sequence)-1] - copy_sequence[0])
+    else:
+        total_distance += abs(copy_sequence[len(copy_sequence)-1] - initial) 
+        if copy_sequence[0] < initial:
+            total_distance += abs(copy_sequence[len(copy_sequence)-1] - copy_sequence[0])
+            total_distance += abs(copy_sequence[index_initial - 1] - copy_sequence[0])
     
     return total_distance
 
@@ -42,20 +47,22 @@ def look(initial, sequence):
 
 def c_scan(initial, sequence):
     total_distance = 0
-    initial = abs(initial)
 
     copy_sequence = sequence.copy()
-    copy_sequence.append(initial)
+    copy_sequence.append(abs(initial))
     copy_sequence.sort()
-    index_initial = copy_sequence.index(initial)
+    index_initial = copy_sequence.index(abs(initial))
 
-    total_distance += abs(MAX - initial)   # only goes to right direction
-    print(total_distance)
-    if copy_sequence[0] < initial:
-        total_distance += MAX
-        total_distance += abs(copy_sequence[index_initial - 1] - 0)
-        print(total_distance)
-    
+    if initial < 0:     # moving left 
+        initial = abs(initial)
+        total_distance += abs(initial - 0)
+        total_distance += copy_sequence[len(copy_sequence)-1]
+    else:
+        total_distance += abs(MAX - initial)   # only goes to right direction
+        if copy_sequence[0] < initial:
+            total_distance += MAX
+            total_distance += abs(copy_sequence[index_initial - 1] - 0)
+        
     return total_distance
 
 def scan(initial, sequence):
@@ -126,8 +133,6 @@ if __name__ == "__main__":
                      print("Error: Disk cylinder value be an integer between 0 and 4999 inclusive.")
     else:
         access_sequence = [random.randint(0, MAX) for i in range(100)]
-    
-    print(access_sequence) 
 
     print("FCFS", fcfs(initial_position, access_sequence))
     print("SSTF", sstf(initial_position, access_sequence))
