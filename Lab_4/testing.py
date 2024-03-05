@@ -113,7 +113,7 @@ class TestSeekAlgorithms3(unittest.TestCase):
     # scans 0 --> 3999, jumps to 0
     def test_cscan1(self):
         input_values = [3205, 50, 197, 2212, 195, 1167]
-        start_position = 137
+        start_position = -137
         self.assertEqual(c_scan(start_position, input_values), 9911)
 
     # scan right
@@ -125,7 +125,7 @@ class TestSeekAlgorithms3(unittest.TestCase):
     # look right
     def test_clook1(self):
         input_values = [3205, 50, 197, 2212, 195, 1167]
-        start_position = 137
+        start_position = -137
         self.assertEqual(c_look(start_position, input_values), 6223)
 
 

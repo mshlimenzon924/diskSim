@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 import random
 
@@ -13,12 +14,9 @@ def c_look(initial, sequence):
     index_initial = copy_sequence.index(initial)
 
     total_distance += abs(copy_sequence[len(copy_sequence)-1] - initial) 
-    print(total_distance)
     if copy_sequence[0] < initial:
         total_distance += abs(copy_sequence[len(copy_sequence)-1] - copy_sequence[0])
-        print(total_distance)
         total_distance += abs(copy_sequence[index_initial - 1] - copy_sequence[0])
-        print(total_distance)
     
     return total_distance
 
@@ -32,10 +30,8 @@ def look(initial, sequence):
     if initial < 0:     # moving left 
         initial = abs(initial)
         total_distance += abs(initial - copy_sequence[0]) 
-        print(total_distance)
         if copy_sequence[len(copy_sequence)-1] > initial: 
             total_distance += abs(copy_sequence[len(copy_sequence)-1] - copy_sequence[0])
-            print(total_distance)
     else:   # moving right
         initial = abs(initial)
         total_distance += abs(copy_sequence[len(copy_sequence)-1] - initial) 
@@ -46,17 +42,19 @@ def look(initial, sequence):
 
 def c_scan(initial, sequence):
     total_distance = 0
+    initial = abs(initial)
 
     copy_sequence = sequence.copy()
     copy_sequence.append(initial)
     copy_sequence.sort()
     index_initial = copy_sequence.index(initial)
-    initial = abs(initial)
 
     total_distance += abs(MAX - initial)   # only goes to right direction
+    print(total_distance)
     if copy_sequence[0] < initial:
         total_distance += MAX
         total_distance += abs(copy_sequence[index_initial - 1] - 0)
+        print(total_distance)
     
     return total_distance
 
@@ -80,10 +78,10 @@ def scan(initial, sequence):
 
 # find the next element that is closest to previous starting with head
 def sstf(initial, sequence):
+    initial = abs(initial)
     total_distance = 0
     current = initial
     copy_sequence = sorted(sequence)
-    initial = abs(initial)
 
     while len(copy_sequence) > 0:   # delete elements of it as we calculate 
         min_element =  min(copy_sequence, key=lambda element: abs(current - element))
@@ -95,9 +93,9 @@ def sstf(initial, sequence):
 
 # the order they come in that's the order they will be processed 
 def fcfs(initial, sequence):
+    initial = abs(initial)
     total_distance = 0
     current = initial
-    initial = abs(initial)
 
     for i in range(len(sequence)):
         total_distance += abs(sequence[i] - current)

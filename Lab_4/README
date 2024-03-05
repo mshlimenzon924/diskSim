@@ -1,0 +1,9 @@
+Name: Mira Shlimenzon
+Functionality: My program is fully functional. One of the personal choices I made is to make the c_scan and c_look functions only read in the 0-4999 direction as many sources online and in class discussion made this seem like the case.
+Using this information, my program functions as expected.
+
+To make diskSim.py executable 
+1. rm diskSim
+2. ln -s diskSim.py diskSim
+3. chmod +x diskSim
+You should now be able to run the executable without the .py extension
